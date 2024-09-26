@@ -70,8 +70,3 @@ print("MSE:", model.evaluate(data[1], data[3]))
 predictions = model.predict(data[1])
 
 predicted_rsi, actual_rsi = scalers['AAPL'].inverse_transform(predictions),  scalers['AAPL'].inverse_transform(data[3].reshape(-1, 1))
-
-signals = pd.DataFrame(index=stock_data['AAPL'].index[-len(predictions):])
-signals['predicted_rsi'],signals['actual_rsi'], signals['signal'] = predicted_rsi, actual_rsi, 0
-
-signals.loc[signals['predicted_rsi'] < 70, 'signal'], signals.loc[signals['predicted_rsi'] > 30, 'signal'] = -1, 1
